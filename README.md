@@ -38,10 +38,10 @@ Custom architecture defined in `Hybrid_CNN_LSTM`:
 ### C-BiLSTM (Bidirectional)
 Replaces the unidirectional LSTM with a **BiLSTM**, allowing the model to attend to context in both directions across the CNN feature map.
  
-### C-BiLSTM + Attention
-Adds a **self-attention layer** after the BiLSTM to let the model weight the most discriminative time steps before classification.
+### C-LSTM + Attention
+Adds a **self-attention layer**  to let the model weight the most discriminative time steps before classification.
  
-### C-BiLSTM + Attention + Focal Loss
+### C-LSTM + Focal Loss
 Swaps `CrossEntropyLoss` for **Focal Loss**, which down-weights easy examples and focuses training on hard-to-classify minority attack types.
 
 ## Requirements
