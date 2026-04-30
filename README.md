@@ -14,13 +14,6 @@ Three models are trained and evaluated on a 23-class classification task (1 norm
 
 Primary evaluation metric: **Macro F1** (preferred over Weighted F1 under heavy class imbalance).
 
-## Repo Structure
-
-```
-├── Copy_of_Trial_GP_topic2_modified.ipynb   # Main notebook
-├── KDDTrain+.txt                            # NSL-KDD training dataset
-└── README.md
-```
 
 ## Dataset
 
