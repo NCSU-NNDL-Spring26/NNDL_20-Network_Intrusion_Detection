@@ -11,24 +11,24 @@ Primary evaluation metric: **Macro F1** (preferred over Weighted F1 under heavy 
 
 ## Dataset
 
-**NSL-KDD** — an improved version of the KDD Cup 1999 dataset. The training file (`KDDTrain+.txt`) contains 41 raw features plus an attack-type label and difficulty score (the latter is dropped). Categorical features are one-hot encoded; all features are standardized via `StandardScaler`.
+**NSL-KDD** - an improved version of the KDD Cup 1999 dataset. The training file (`KDDTrain+.txt`) contains 41 raw features plus an attack-type label and difficulty score (the latter is dropped). Categorical features are one-hot encoded; all features are standardized via `StandardScaler`.
 
 Classes include: `normal`, `neptune`, `satan`, `ipsweep`, `portsweep`, `smurf`, `back`, `teardrop`, `warezclient`, `pod`, `guess_passwd`, and 12 others. Several classes (e.g. `perl`, `spy`, `multihop`) have near-zero support in the test split — treat their per-class metrics as unreliable.
 
 ## Pipeline
 
-1. **Load & encode** — label-encode targets, one-hot encode categorical features
-2. **Split** — 72% train / 8% val / 20% test (stratified)
-3. **Scale** — `StandardScaler` fit on train only
-4. **SMOTE** — capped oversampling applied to **training set only** (minority classes capped at 10% of majority count)
-5. **Train** — C-LSTM on processed data
-6. **Evaluate** — classification report, confusion matrix heatmap, and F1 scores
+1. **Load & encode** - label-encode targets, one-hot encode categorical features
+2. **Split** - 72% train / 8% val / 20% test (stratified)
+3. **Scale** - `StandardScaler` fit on train only
+4. **SMOTE** - capped oversampling applied to **training set only** (minority classes capped at 10% of majority count)
+5. **Train** - C-LSTM on processed data
+6. **Evaluate** - classification report, confusion matrix heatmap, and F1 scores
 
 ## Model
 
 ### C-LSTM (Hybrid CNN-LSTM)
 Custom architecture defined in `Hybrid_CNN_LSTM`:
-- **1D CNN** (`Conv1d` → `ReLU` → `MaxPool1d`) extracts local feature patterns
+- **1D CNN** (`Conv1d` -> `ReLU` -> `MaxPool1d`) extracts local feature patterns
 - **LSTM** captures sequential dependencies across the feature map
 - **Fully connected head** outputs 23-class logits
 - Loss: `CrossEntropyLoss` with inverse-frequency class weights
