@@ -1,4 +1,4 @@
-# Multi-Class Network Intrusion Detection — Team 20
+# Multi-Class Network Intrusion Detection
 
 Neural Networks course project using a hybrid deep learning model for network intrusion detection on the NSL-KDD dataset.
 
@@ -25,14 +25,24 @@ Classes include: `normal`, `neptune`, `satan`, `ipsweep`, `portsweep`, `smurf`, 
 6. **Evaluate** - classification report, confusion matrix heatmap, and F1 scores
 
 ## Model
-
-### C-LSTM (Hybrid CNN-LSTM)
+ 
+The project explores a progression of hybrid CNN-LSTM architectures, each building on the last:
+ 
+### C-LSTM (Hybrid CNN-LSTM) — Baseline
 Custom architecture defined in `Hybrid_CNN_LSTM`:
-- **1D CNN** (`Conv1d` -> `ReLU` -> `MaxPool1d`) extracts local feature patterns
+- **1D CNN** (`Conv1d` → `ReLU` → `MaxPool1d`) extracts local feature patterns
 - **LSTM** captures sequential dependencies across the feature map
 - **Fully connected head** outputs 23-class logits
 - Loss: `CrossEntropyLoss` with inverse-frequency class weights
 - Optimizer: Adam
+### C-BiLSTM (Bidirectional)
+Replaces the unidirectional LSTM with a **BiLSTM**, allowing the model to attend to context in both directions across the CNN feature map.
+ 
+### C-BiLSTM + Attention
+Adds a **self-attention layer** after the BiLSTM to let the model weight the most discriminative time steps before classification.
+ 
+### C-BiLSTM + Attention + Focal Loss
+Swaps `CrossEntropyLoss` for **Focal Loss**, which down-weights easy examples and focuses training on hard-to-classify minority attack types.
 
 ## Requirements
 
