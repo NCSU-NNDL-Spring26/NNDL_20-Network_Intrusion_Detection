@@ -1,16 +1,10 @@
 # Multi-Class Network Intrusion Detection — Team 20
 
-Neural Networks course project comparing classical and deep learning approaches for network intrusion detection on the NSL-KDD dataset.
+Neural Networks course project using a hybrid deep learning model for network intrusion detection on the NSL-KDD dataset.
 
 ## Overview
 
-Three models are trained and evaluated on a 23-class classification task (1 normal + 22 attack types):
-
-| Model | Type |
-|---|---|
-| Logistic Regression | Linear baseline |
-| Random Forest | Ensemble baseline |
-| C-LSTM (Hybrid CNN-LSTM) | Deep learning model (PyTorch) |
+A custom **C-LSTM (Hybrid CNN-LSTM)** architecture is trained and evaluated on a 23-class classification task (1 normal + 22 attack types).
 
 Primary evaluation metric: **Macro F1** (preferred over Weighted F1 under heavy class imbalance).
 
@@ -27,10 +21,10 @@ Classes include: `normal`, `neptune`, `satan`, `ipsweep`, `portsweep`, `smurf`, 
 2. **Split** — 72% train / 8% val / 20% test (stratified)
 3. **Scale** — `StandardScaler` fit on train only
 4. **SMOTE** — capped oversampling applied to **training set only** (minority classes capped at 10% of majority count)
-5. **Train** — all three models on the same processed data
-6. **Evaluate** — classification report + confusion matrix per model; bar chart comparing Macro/Weighted F1 across all three
+5. **Train** — C-LSTM on processed data
+6. **Evaluate** — classification report, confusion matrix heatmap, and F1 scores
 
-## Model Details
+## Model
 
 ### C-LSTM (Hybrid CNN-LSTM)
 Custom architecture defined in `Hybrid_CNN_LSTM`:
@@ -39,14 +33,6 @@ Custom architecture defined in `Hybrid_CNN_LSTM`:
 - **Fully connected head** outputs 23-class logits
 - Loss: `CrossEntropyLoss` with inverse-frequency class weights
 - Optimizer: Adam
-
-### Random Forest
-- `class_weight='balanced'`
-- Trained on original scaled data (no SMOTE)
-
-### Logistic Regression
-- `class_weight='balanced'`, `max_iter=1000`
-- Trained on original scaled data (no SMOTE)
 
 ## Requirements
 
@@ -71,4 +57,4 @@ The notebook was developed in **Google Colab** (Python 3.12, CUDA 12.8). GPU acc
 
 1. Upload `KDDTrain+.txt` when prompted (Colab file upload cell), or adjust the path for local execution.
 2. Run all cells in order.
-3. Outputs: per-model classification reports, confusion matrix heatmaps, and a comparative F1 bar chart.
+3. Outputs: classification report, confusion matrix heatmap, and F1 scores.
