@@ -13,7 +13,7 @@ Primary evaluation metric: **Macro F1** (preferred over Weighted F1 under heavy 
 
 **NSL-KDD** - an improved version of the KDD Cup 1999 dataset. The training file (`KDDTrain+.txt`) contains 41 raw features plus an attack-type label and difficulty score (the latter is dropped). Categorical features are one-hot encoded; all features are standardized via `StandardScaler`.
 
-Classes include: `normal`, `neptune`, `satan`, `ipsweep`, `portsweep`, `smurf`, `back`, `teardrop`, `warezclient`, `pod`, `guess_passwd`, and 12 others. Several classes (e.g. `perl`, `spy`, `multihop`) have near-zero support in the test split — treat their per-class metrics as unreliable.
+Classes include: `normal`, `neptune`, `satan`, `ipsweep`, `portsweep`, `smurf`, `back`, `teardrop`, `warezclient`, `pod`, `guess_passwd`, and 12 others. Several classes (e.g. `perl`, `spy`, `multihop`) have near-zero support in the test split - treat their per-class metrics as unreliable.
 
 ## Pipeline
 
@@ -28,9 +28,9 @@ Classes include: `normal`, `neptune`, `satan`, `ipsweep`, `portsweep`, `smurf`, 
  
 The project explores a progression of hybrid CNN-LSTM architectures, each building on the last:
  
-### C-LSTM (Hybrid CNN-LSTM) — Baseline
+### C-LSTM (Hybrid CNN-LSTM) - Baseline
 Custom architecture defined in `Hybrid_CNN_LSTM`:
-- **1D CNN** (`Conv1d` → `ReLU` → `MaxPool1d`) extracts local feature patterns
+- **1D CNN** (`Conv1d` -> `ReLU` -> `MaxPool1d`) extracts local feature patterns
 - **LSTM** captures sequential dependencies across the feature map
 - **Fully connected head** outputs 23-class logits
 - Loss: `CrossEntropyLoss` with inverse-frequency class weights
